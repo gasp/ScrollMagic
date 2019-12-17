@@ -25,8 +25,11 @@
 		// Loads whole gsap package onto global scope.
 		var gsap = require("gsap/dist/gsap") || require("gsap");
 
+		var tween = typeof gsap.TweenMax === 'undefined' ? TweenMax : gsap.TweenMax;
+		var timeline = typeof gsap.TimelineMax === 'undefined' ? TimelineMax : gsap.TimelineMax;
+
 		// TweenMax/TimelineMax will be global in v2. In v3, they will be on the gsap object
-		factory(require('scrollmagic'), gsap, TweenMax || gsap, TimelineMax || gsap);
+		factory(require('scrollmagic'), gsap, tween, timeline);
 	} else {
 		// Browser globals
 		factory(root.ScrollMagic || (root.jQuery && root.jQuery.ScrollMagic), root.gsap, root.gsap || root.TweenMax || root.TweenLite, root.gsap || root.TimelineMax || root.TimelineLite);
